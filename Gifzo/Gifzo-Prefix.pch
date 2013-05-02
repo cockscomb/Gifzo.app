@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'Gifzo' target in the 'Gifzo' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

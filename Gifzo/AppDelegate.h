@@ -7,9 +7,11 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "DrawMouseBoxView.h"
+#import "Recorder.h"
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate, DrawMouseBoxViewDelegate, RecorderDelegate>
 
-@property (assign) IBOutlet NSWindow *window;
+@property Recorder *recorder;
 
 @end

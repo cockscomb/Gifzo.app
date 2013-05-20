@@ -7,15 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5534651B1743FC9400DBF01C /* icon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 5534651A1743FC9400DBF01C /* icon.icns */; };
+		55354AF7173A82F500BEEBA6 /* Recorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 55354AF6173A82F500BEEBA6 /* Recorder.m */; };
+		55354AFE173A8D2200BEEBA6 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55354AFD173A8D2200BEEBA6 /* AVFoundation.framework */; };
+		555F1F20173BB15100EBDE0C /* BorderlessWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 555F1F1F173BB15100EBDE0C /* BorderlessWindow.m */; };
 		55E40D1917321222008F31EC /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E40D1817321222008F31EC /* Cocoa.framework */; };
 		55E40D2317321222008F31EC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 55E40D2117321222008F31EC /* InfoPlist.strings */; };
 		55E40D2517321222008F31EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E40D2417321222008F31EC /* main.m */; };
 		55E40D2917321222008F31EC /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 55E40D2717321222008F31EC /* Credits.rtf */; };
 		55E40D2C17321222008F31EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E40D2B17321222008F31EC /* AppDelegate.m */; };
 		55E40D2F17321222008F31EC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E40D2D17321222008F31EC /* MainMenu.xib */; };
+		55E40D42173218E0008F31EC /* DrawMouseBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E40D41173218E0008F31EC /* DrawMouseBoxView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5534651A1743FC9400DBF01C /* icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = icon.icns; path = ../icon.icns; sourceTree = "<group>"; };
+		55354AF5173A82F500BEEBA6 /* Recorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Recorder.h; sourceTree = "<group>"; };
+		55354AF6173A82F500BEEBA6 /* Recorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Recorder.m; sourceTree = "<group>"; };
+		55354AFD173A8D2200BEEBA6 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		555F1F1E173BB15100EBDE0C /* BorderlessWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BorderlessWindow.h; sourceTree = "<group>"; };
+		555F1F1F173BB15100EBDE0C /* BorderlessWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BorderlessWindow.m; sourceTree = "<group>"; };
 		55E40D1417321222008F31EC /* Gifzo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Gifzo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55E40D1817321222008F31EC /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		55E40D1B17321222008F31EC /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -29,6 +40,8 @@
 		55E40D2A17321222008F31EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		55E40D2B17321222008F31EC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		55E40D2E17321222008F31EC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		55E40D40173218E0008F31EC /* DrawMouseBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawMouseBoxView.h; sourceTree = "<group>"; };
+		55E40D41173218E0008F31EC /* DrawMouseBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawMouseBoxView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +49,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55354AFE173A8D2200BEEBA6 /* AVFoundation.framework in Frameworks */,
 				55E40D1917321222008F31EC /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -63,6 +77,7 @@
 		55E40D1717321222008F31EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55354AFD173A8D2200BEEBA6 /* AVFoundation.framework */,
 				55E40D1817321222008F31EC /* Cocoa.framework */,
 				55E40D1A17321222008F31EC /* Other Frameworks */,
 			);
@@ -82,8 +97,14 @@
 		55E40D1E17321222008F31EC /* Gifzo */ = {
 			isa = PBXGroup;
 			children = (
+				55E40D40173218E0008F31EC /* DrawMouseBoxView.h */,
+				55E40D41173218E0008F31EC /* DrawMouseBoxView.m */,
+				55354AF5173A82F500BEEBA6 /* Recorder.h */,
+				55354AF6173A82F500BEEBA6 /* Recorder.m */,
 				55E40D2A17321222008F31EC /* AppDelegate.h */,
 				55E40D2B17321222008F31EC /* AppDelegate.m */,
+				555F1F1E173BB15100EBDE0C /* BorderlessWindow.h */,
+				555F1F1F173BB15100EBDE0C /* BorderlessWindow.m */,
 				55E40D2D17321222008F31EC /* MainMenu.xib */,
 				55E40D1F17321222008F31EC /* Supporting Files */,
 			);
@@ -98,6 +119,7 @@
 				55E40D2417321222008F31EC /* main.m */,
 				55E40D2617321222008F31EC /* Gifzo-Prefix.pch */,
 				55E40D2717321222008F31EC /* Credits.rtf */,
+				5534651A1743FC9400DBF01C /* icon.icns */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -129,7 +151,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0450;
-				ORGANIZATIONNAME = zat;
+				ORGANIZATIONNAME = "Kazato Sugimoto";
 			};
 			buildConfigurationList = 55E40D0E17321222008F31EC /* Build configuration list for PBXProject "Gifzo" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -156,6 +178,7 @@
 				55E40D2317321222008F31EC /* InfoPlist.strings in Resources */,
 				55E40D2917321222008F31EC /* Credits.rtf in Resources */,
 				55E40D2F17321222008F31EC /* MainMenu.xib in Resources */,
+				5534651B1743FC9400DBF01C /* icon.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,6 +191,9 @@
 			files = (
 				55E40D2517321222008F31EC /* main.m in Sources */,
 				55E40D2C17321222008F31EC /* AppDelegate.m in Sources */,
+				55E40D42173218E0008F31EC /* DrawMouseBoxView.m in Sources */,
+				55354AF7173A82F500BEEBA6 /* Recorder.m in Sources */,
+				555F1F20173BB15100EBDE0C /* BorderlessWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +323,7 @@
 				55E40D3417321222008F31EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

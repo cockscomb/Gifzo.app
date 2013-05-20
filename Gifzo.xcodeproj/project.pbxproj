@@ -18,6 +18,7 @@
 		55E40D2C17321222008F31EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E40D2B17321222008F31EC /* AppDelegate.m */; };
 		55E40D2F17321222008F31EC /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 55E40D2D17321222008F31EC /* MainMenu.xib */; };
 		55E40D42173218E0008F31EC /* DrawMouseBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 55E40D41173218E0008F31EC /* DrawMouseBoxView.m */; };
+		55F348A3174AC8F80086B4AE /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55F348A1174AC8D70086B4AE /* Carbon.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		55E40D2E17321222008F31EC /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		55E40D40173218E0008F31EC /* DrawMouseBoxView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrawMouseBoxView.h; sourceTree = "<group>"; };
 		55E40D41173218E0008F31EC /* DrawMouseBoxView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrawMouseBoxView.m; sourceTree = "<group>"; };
+		55F348A1174AC8D70086B4AE /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +53,7 @@
 			files = (
 				55354AFE173A8D2200BEEBA6 /* AVFoundation.framework in Frameworks */,
 				55E40D1917321222008F31EC /* Cocoa.framework in Frameworks */,
+				55F348A3174AC8F80086B4AE /* Carbon.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +80,7 @@
 		55E40D1717321222008F31EC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				55F348A1174AC8D70086B4AE /* Carbon.framework */,
 				55354AFD173A8D2200BEEBA6 /* AVFoundation.framework */,
 				55E40D1817321222008F31EC /* Cocoa.framework */,
 				55E40D1A17321222008F31EC /* Other Frameworks */,

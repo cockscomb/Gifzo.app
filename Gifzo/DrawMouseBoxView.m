@@ -14,6 +14,7 @@
     NSRect _selectionRect;
     Boolean selecting, selecting_finished;
     Boolean _globalKeySetted;
+    EventHotKeyRef _hotKeyRef;
 }
 
 - (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
@@ -55,22 +56,50 @@
         [self display];
         [[self window] setIgnoresMouseEvents:YES];
         [[self window] invalidateCursorRectsForView:self];
+    } else {
+        UnregisterEventHotKey(_hotKeyRef);
     }
     
     [self.delegate pressRecordKey:self didSelectRect:_selectionRect didSelectScreen:self.screen];
 }
 
-- (void)globalKeyDown:(NSEvent *)event
+- (void)registerHotKey
 {
-    [self recordButton:event];
+    EventTypeSpec eventTypeSpecList[] = {
+        { kEventClassKeyboard, kEventHotKeyPressed }
+    };
+    
+    InstallApplicationEventHandler(&hotKeyHandler, GetEventTypeCount(eventTypeSpecList),
+                                   eventTypeSpecList, (__bridge void *)self, NULL);
+    EventHotKeyID hotKeyID;
+    hotKeyID.id = 0;
+    hotKeyID.signature = 'r';
+    UInt32 hotKeyCode = 31;  // r
+    UInt32 hotKeyModifier = optionKey;
+
+    
+    RegisterEventHotKey(hotKeyCode, hotKeyModifier, hotKeyID,
+                        GetApplicationEventTarget(), 0, &_hotKeyRef);
+}
+
+OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void *userData)
+{
+    EventHotKeyID hotKeyID;
+    GetEventParameter(theEvent, kEventParamDirectObject, typeEventHotKeyID, NULL,
+                      sizeof(hotKeyID), NULL, &hotKeyID);
+    
+    if (hotKeyID.signature == 'r') {
+        id self = (__bridge id)userData;
+        [self recordKeyPressed];
+    }
+
+    return noErr;
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
     if (!_globalKeySetted) {
-        [NSEvent addGlobalMonitorForEventsMatchingMask:NSKeyDownMask handler:^(NSEvent *event) {
-            [self globalKeyDown:event];
-        }];
+        [self registerHotKey];
     }
     
     selecting = false;

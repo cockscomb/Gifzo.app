@@ -59,7 +59,7 @@
         UnregisterEventHotKey(_hotKeyRef);
     }
 
-    [self.delegate pressRecordKey:self didSelectRect:_selectionRect didSelectScreen:self.screen];
+    [self.delegate startRecordingKeyDidPressedInView:self withRect:_selectionRect screen:self.screen];
 }
 
 - (void)registerHotKey

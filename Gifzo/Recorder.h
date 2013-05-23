@@ -12,7 +12,7 @@
 @class Recorder;
 
 @protocol RecorderDelegate <NSObject>
-- (void)didRecord:(Recorder *)record outputFileURL:(NSURL *)outputFileURL;
+- (void)recorder:(Recorder *)recorder didRecordedWithOutputURL:(NSURL *)outputFileURL;
 @end
 
 @interface Recorder : NSObject <AVCaptureFileOutputRecordingDelegate> {

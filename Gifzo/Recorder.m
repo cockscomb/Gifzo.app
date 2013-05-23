@@ -61,7 +61,7 @@
         [NSApp terminate:nil];
     }
 
-    [self.delegate didRecord:self outputFileURL:outputFileURL];
+    [self.delegate recorder:self didRecordedWithOutputURL:outputFileURL];
 }
 
 - (void)finishRecord

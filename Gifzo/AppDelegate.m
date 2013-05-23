@@ -59,7 +59,8 @@
     }
 }
 
-- (void)pressRecordKey:(DrawMouseBoxView *)view didSelectRect:(NSRect)rect didSelectScreen:(NSScreen *)screen
+#pragma mark - DrawMouseBoxViewDelegate
+- (void)startRecordingKeyDidPressedInView:(DrawMouseBoxView *)view withRect:(NSRect)rect screen:(NSScreen *)screen
 {
     if (_recordingDidFinished) return;
 
@@ -71,7 +72,8 @@
     }
 }
 
-- (void)didRecord:(Recorder *)record outputFileURL:(NSURL *)outputFileURL
+#pragma mark - RecorderDelegate
+- (void)recorder:(Recorder *)recorder didRecordedWithOutputURL:(NSURL *)outputFileURL
 {
     for (NSWindow *window in _windows) {
         [window close];

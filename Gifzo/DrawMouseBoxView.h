@@ -12,7 +12,7 @@
 @class DrawMouseBoxView;
 
 @protocol DrawMouseBoxViewDelegate <NSObject>
-- (void)pressRecordKey:(DrawMouseBoxView *)view didSelectRect:(NSRect)rect didSelectScreen:(NSScreen *)screen;
+- (void)startRecordingKeyDidPressedInView:(DrawMouseBoxView *)view withRect:(NSRect)rect screen:(NSScreen *)screen;
 @end
 
 @interface DrawMouseBoxView : NSView

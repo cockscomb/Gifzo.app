@@ -9,16 +9,16 @@
 #import "Recorder.h"
 
 @implementation Recorder {
-    AVCaptureSession *mSession;
-    AVCaptureMovieFileOutput *mMovieFileOutput;
-    NSTimer *mTimer;
+    AVCaptureSession *_captureSession;
+    AVCaptureMovieFileOutput *_movieFileOutput;
+    NSTimer *_timer;
 }
 
 - (void)screenRecording:(NSURL *)destPath cropRect:(NSRect)rect screen:(NSScreen *)screen
 {
-    mSession = [[AVCaptureSession alloc] init];
+    _captureSession = [[AVCaptureSession alloc] init];
 
-    mSession.sessionPreset = AVCaptureSessionPresetHigh;
+    _captureSession.sessionPreset = AVCaptureSessionPresetHigh;
 
     NSDictionary *screenDictionary = [screen deviceDescription];
     NSNumber *screenID = [screenDictionary objectForKey:@"NSScreenNumber"];
@@ -28,17 +28,17 @@
     AVCaptureScreenInput *input = [[AVCaptureScreenInput alloc] initWithDisplayID:displayID];
     [input setCropRect:NSRectToCGRect(rect)];
 
-    if ([mSession canAddInput:input]) {
-        [mSession addInput:input];
+    if ([_captureSession canAddInput:input]) {
+        [_captureSession addInput:input];
     }
 
-    mMovieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+    _movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
 
-    if ([mSession canAddOutput:mMovieFileOutput]) {
-        [mSession addOutput:mMovieFileOutput];
+    if ([_captureSession canAddOutput:_movieFileOutput]) {
+        [_captureSession addOutput:_movieFileOutput];
     }
 
-    [mSession startRunning];
+    [_captureSession startRunning];
 
     if ([[NSFileManager defaultManager] fileExistsAtPath:[destPath path]]) {
         NSError *err;
@@ -47,13 +47,13 @@
         }
     }
 
-    [mMovieFileOutput startRecordingToOutputFileURL:destPath recordingDelegate:self];
+    [_movieFileOutput startRecordingToOutputFileURL:destPath recordingDelegate:self];
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
 {
-    [mSession stopRunning];
-    mSession = nil;
+    [_captureSession stopRunning];
+    _captureSession = nil;
 
     if (error) {
         NSLog(@"Did finish recording to %@ due to error %@", [outputFileURL description], [error description]);
@@ -68,7 +68,7 @@
 {
     NSLog(@"finish recording");
 
-    [mMovieFileOutput stopRecording];
+    [_movieFileOutput stopRecording];
 }
 
 @end

@@ -11,28 +11,28 @@
 
 @implementation AppDelegate {
     NSMutableArray *_windows;
-    Boolean recording, recording_finish;
-    NSURL *_temp_url;
+    BOOL _isRecording, _recordingDidFinished;
+    NSURL *_tempURL;
 }
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     self.recorder = [[Recorder alloc] init];
     self.recorder.delegate = self;
-    recording = false;
+    _isRecording = NO;
 
     // movファイル書き出し用のテンポラリディレクトリの初期化
     NSString *tempName = [self generateTempName];
-    _temp_url = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mov"]];
+    _tempURL = [NSURL fileURLWithPath:[tempName stringByAppendingPathExtension:@"mov"]];
 
     [self startCropRect];
 }
 
 - (void)startRecording:(NSRect)cropRect screen:(NSScreen *)screen
 {
-    [self.recorder screenRecording:_temp_url cropRect:cropRect screen:screen];
+    [self.recorder screenRecording:_tempURL cropRect:cropRect screen:screen];
 
-    recording = true;
+    _isRecording = YES;
 }
 
 #define kShadyWindowLevel   (NSScreenSaverWindowLevel + 1)
@@ -61,11 +61,11 @@
 
 - (void)pressRecordKey:(DrawMouseBoxView *)view didSelectRect:(NSRect)rect didSelectScreen:(NSScreen *)screen
 {
-    if (recording_finish) return;
+    if (_recordingDidFinished) return;
 
-    if (recording) {
+    if (_isRecording) {
         [self.recorder finishRecord];
-        recording_finish = true;
+        _recordingDidFinished = YES;
     } else {
         [self startRecording:rect screen:screen];
     }

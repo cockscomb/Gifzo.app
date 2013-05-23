@@ -11,8 +11,8 @@
 @implementation DrawMouseBoxView {
     NSPoint _mouseDownPoint;
     NSRect _selectionRect;
-    Boolean selecting, selecting_finished, _selection_dragged;
-    Boolean _globalKeySetted;
+    BOOL _isSelecting, _selectionDidFinished, _selectionIsDragging;
+    BOOL _globalKeySettled;
     EventHotKeyRef _hotKeyRef;
 }
 
@@ -34,7 +34,7 @@
         [NSApp terminate:nil];
     }
 
-    if (!selecting) return;
+    if (!_isSelecting) return;
 
     [self recordButton:theEvent];
 }
@@ -50,8 +50,8 @@
 
 - (void)recordKeyPressed
 {
-    if (!selecting_finished) {
-        selecting_finished = true;
+    if (!_selectionDidFinished) {
+        _selectionDidFinished = YES;
         [self display];
         [[self window] setIgnoresMouseEvents:YES];
         [[self window] invalidateCursorRectsForView:self];
@@ -96,19 +96,19 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
 
 - (void)mouseDown:(NSEvent *)theEvent
 {
-    if (!_globalKeySetted) {
+    if (!_globalKeySettled) {
         [self registerHotKey];
     }
 
-    selecting = false;
-    _selection_dragged = false;
+    _isSelecting = NO;
+    _selectionIsDragging = YES;
 
     _mouseDownPoint = [theEvent locationInWindow];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
-    if (!_selection_dragged) return;
+    if (!_selectionIsDragging) return;
 
     NSPoint mouseUpPoint = [theEvent locationInWindow];
     _selectionRect = NSMakeRect(
@@ -119,7 +119,7 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
 
     [self setNeedsDisplayInRect:_selectionRect];
 
-    selecting = true;
+    _isSelecting = true;
 
 }
 
@@ -134,7 +134,7 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
             MAX(_mouseDownPoint.y, curPoint.y) - MIN(_mouseDownPoint.y, curPoint.y));
 
     [self setNeedsDisplayInRect:NSUnionRect(_selectionRect, previousSelectionRect)];
-    _selection_dragged = true;
+    _selectionIsDragging = YES;
 }
 
 - (void)drawRect:(NSRect)dirtyRect
@@ -146,11 +146,11 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
     [[NSColor clearColor] set];
     NSRectFill(_selectionRect);
 
-    if (selecting || selecting_finished) {
+    if (_isSelecting || _selectionDidFinished) {
         [self drawPressKeyMessage];
     }
 
-    if (selecting_finished) {
+    if (_selectionDidFinished) {
 
         return;
     }
@@ -163,7 +163,7 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
 {
     NSColor *transparentBlackColor = [NSColor colorWithDeviceRed:0.0 green:0.0 blue:0.0 alpha:0.5];
 
-    NSString *message = selecting_finished ? @"Option+Rで収録終了" : @"Option+Rで収録開始";
+    NSString *message = _selectionDidFinished ? @"Option+Rで収録終了" : @"Option+Rで収録開始";
     NSMutableAttributedString *pressKeyMessageString = [[NSMutableAttributedString alloc] initWithString:message];
 
     Float32 fontSize = 18.0;
@@ -171,7 +171,7 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
     CGFloat boxWidth = fontSize * [pressKeyMessageString length] - 64.0, boxHeight = fontSize + 4.0;
     NSRect boxRect;
 
-    if (selecting_finished) {
+    if (_selectionDidFinished) {
         boxRect = NSMakeRect(NSMidX(_selectionRect) - boxWidth / 2.0, NSMaxY(_selectionRect) + boxHeight / 2.0, boxWidth, boxHeight);
 
     } else {
@@ -205,7 +205,7 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
 
 - (void)resetCursorRects
 {
-    if (selecting_finished) return;
+    if (_selectionDidFinished) return;
     [self addCursorRect:[self frame] cursor:[NSCursor crosshairCursor]];
 }
 

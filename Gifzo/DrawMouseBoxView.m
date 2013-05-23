@@ -12,7 +12,7 @@
 {
     NSPoint _mouseDownPoint;
     NSRect _selectionRect;
-    Boolean selecting, selecting_finished;
+    Boolean selecting, selecting_finished, _selection_dragged;
     Boolean _globalKeySetted;
     EventHotKeyRef _hotKeyRef;
 }
@@ -103,12 +103,15 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
     }
     
     selecting = false;
+    _selection_dragged = false;
     
     _mouseDownPoint = [theEvent locationInWindow];
 }
 
 - (void)mouseUp:(NSEvent *)theEvent
 {
+    if (!_selection_dragged) return;
+    
 	NSPoint mouseUpPoint = [theEvent locationInWindow];
     _selectionRect = NSMakeRect(
                                       MIN(_mouseDownPoint.x, mouseUpPoint.x),
@@ -119,6 +122,7 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
     [self setNeedsDisplayInRect:_selectionRect];
 
     selecting = true;
+
 }
 
 - (void)mouseDragged:(NSEvent *)theEvent
@@ -131,7 +135,8 @@ OSStatus hotKeyHandler(EventHandlerCallRef nextHandler, EventRef theEvent, void 
                                 MAX(_mouseDownPoint.x, curPoint.x) - MIN(_mouseDownPoint.x, curPoint.x),
                                 MAX(_mouseDownPoint.y, curPoint.y) - MIN(_mouseDownPoint.y, curPoint.y));
 
-	[self setNeedsDisplayInRect:NSUnionRect(_selectionRect, previousSelectionRect)];    
+	[self setNeedsDisplayInRect:NSUnionRect(_selectionRect, previousSelectionRect)];
+    _selection_dragged = true;
 }
 
 - (void)drawRect:(NSRect)dirtyRect

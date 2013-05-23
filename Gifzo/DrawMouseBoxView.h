@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <Carbon/Carbon.h>
+
 @class DrawMouseBoxView;
 
 @protocol DrawMouseBoxViewDelegate <NSObject>
@@ -18,4 +19,5 @@
 
 @property(weak) id <DrawMouseBoxViewDelegate> delegate;
 @property NSScreen *screen;
+
 @end

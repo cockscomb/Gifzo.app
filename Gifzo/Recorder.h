@@ -24,6 +24,7 @@
 
 @property(weak) id <RecorderDelegate> delegate;
 
--(void)screenRecording:(NSURL *)destPath cropRect:(NSRect)rect screen:(NSScreen *)screen;
--(void)finishRecord;
+- (void)screenRecording:(NSURL *)destPath cropRect:(NSRect)rect screen:(NSScreen *)screen;
+- (void)finishRecord;
+
 @end

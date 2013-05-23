@@ -12,18 +12,15 @@
 @class Recorder;
 
 @protocol RecorderDelegate <NSObject>
-- (void)didRecord:(Recorder *)record outputFileURL:(NSURL *)outputFileURL;
+- (void)recorder:(Recorder *)recorder didRecordedWithOutputURL:(NSURL *)outputFileURL;
 @end
 
 @interface Recorder : NSObject <AVCaptureFileOutputRecordingDelegate> {
-@private
-    AVCaptureSession *mSession;
-    AVCaptureMovieFileOutput *mMovieFileOutput;
-    NSTimer *mTimer;
 }
 
 @property(weak) id <RecorderDelegate> delegate;
 
--(void)screenRecording:(NSURL *)destPath cropRect:(NSRect)rect screen:(NSScreen *)screen;
--(void)finishRecord;
+- (void)startRecordingWithOutputURL:(NSURL *)outputFileURL croppingRect:(NSRect)rect screen:(NSScreen *)screen;
+- (void)finishRecording;
+
 @end

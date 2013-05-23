@@ -8,7 +8,11 @@
 
 #import "Recorder.h"
 
-@implementation Recorder
+@implementation Recorder {
+    AVCaptureSession *mSession;
+    AVCaptureMovieFileOutput *mMovieFileOutput;
+    NSTimer *mTimer;
+}
 
 - (void)screenRecording:(NSURL *)destPath cropRect:(NSRect)rect screen:(NSScreen *)screen
 {

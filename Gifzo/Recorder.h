@@ -16,10 +16,6 @@
 @end
 
 @interface Recorder : NSObject <AVCaptureFileOutputRecordingDelegate> {
-@private
-    AVCaptureSession *mSession;
-    AVCaptureMovieFileOutput *mMovieFileOutput;
-    NSTimer *mTimer;
 }
 
 @property(weak) id <RecorderDelegate> delegate;

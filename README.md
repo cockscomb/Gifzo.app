@@ -1,9 +1,9 @@
-# Gifzo.app
+## Gifzo.app
 Gifzo Mac Client
 
 http://gifzo.net/
 
-# License
+## License
 The MIT License (MIT)
 
-Copyright (c) 2013 Kazato Sugimoto <uiureo@gmail.com>
+Copyright (c) 2013 Kazato Sugimoto \<uiureo@gmail.com\>

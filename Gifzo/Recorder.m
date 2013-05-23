@@ -14,7 +14,7 @@
     NSTimer *_timer;
 }
 
-- (void)screenRecording:(NSURL *)destPath cropRect:(NSRect)rect screen:(NSScreen *)screen
+- (void)startRecordingWithOutputURL:(NSURL *)outputFileURL croppingRect:(NSRect)rect screen:(NSScreen *)screen
 {
     _captureSession = [[AVCaptureSession alloc] init];
 
@@ -40,14 +40,14 @@
 
     [_captureSession startRunning];
 
-    if ([[NSFileManager defaultManager] fileExistsAtPath:[destPath path]]) {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:[outputFileURL path]]) {
         NSError *err;
-        if (![[NSFileManager defaultManager] removeItemAtPath:[destPath path] error:&err]) {
+        if (![[NSFileManager defaultManager] removeItemAtPath:[outputFileURL path] error:&err]) {
             NSLog(@"Error deleting existing movie %@", [err localizedDescription]);
         }
     }
 
-    [_movieFileOutput startRecordingToOutputFileURL:destPath recordingDelegate:self];
+    [_movieFileOutput startRecordingToOutputFileURL:outputFileURL recordingDelegate:self];
 }
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
@@ -64,7 +64,7 @@
     [self.delegate recorder:self didRecordedWithOutputURL:outputFileURL];
 }
 
-- (void)finishRecord
+- (void)finishRecording
 {
     NSLog(@"finish recording");
 

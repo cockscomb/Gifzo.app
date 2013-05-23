@@ -30,7 +30,7 @@
 
 - (void)startRecording:(NSRect)cropRect screen:(NSScreen *)screen
 {
-    [self.recorder screenRecording:_tempURL cropRect:cropRect screen:screen];
+    [self.recorder startRecordingWithOutputURL:_tempURL croppingRect:cropRect screen:screen];
 
     _isRecording = YES;
 }
@@ -65,7 +65,7 @@
     if (_recordingDidFinished) return;
 
     if (_isRecording) {
-        [self.recorder finishRecord];
+        [self.recorder finishRecording];
         _recordingDidFinished = YES;
     } else {
         [self startRecording:rect screen:screen];

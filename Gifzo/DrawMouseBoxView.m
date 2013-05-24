@@ -73,7 +73,7 @@
     EventHotKeyID hotKeyID;
     hotKeyID.id = 0;
     hotKeyID.signature = 'r';
-    UInt32 hotKeyCode = 31;  // r
+    UInt32 hotKeyCode = 15;  // r
     UInt32 hotKeyModifier = optionKey;
 
 

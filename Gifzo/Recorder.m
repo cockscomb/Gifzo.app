@@ -64,6 +64,15 @@
     [self.delegate recorder:self didRecordedWithOutputURL:outputFileURL];
 }
 
+- (void)captureOutput:(AVCaptureFileOutput *)captureOutput willFinishRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections error:(NSError *)error
+{
+    if (error) {
+        NSLog(@"%@", [error description]);
+        
+        [NSApp terminate:nil];
+    }
+}
+
 - (void)finishRecording
 {
     NSLog(@"finish recording");

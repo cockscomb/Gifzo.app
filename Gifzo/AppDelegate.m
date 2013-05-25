@@ -125,8 +125,9 @@
 // mp4ファイルをmultipart uploadする
 - (void)upload:(NSURL *)videoURL
 {
-    NSString *production_url = @"http://gifzo.net/";
-    NSURL *uploadURL = [NSURL URLWithString:production_url];
+    NSUserDefaults *defaults = [self setupUserDefaults];
+    
+    NSURL *uploadURL = [NSURL URLWithString:[defaults stringForKey:@"url"]];
 
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:uploadURL];
     [request setHTTPMethod:@"POST"];
@@ -162,5 +163,18 @@
     NSPasteboard *pasteboard = [NSPasteboard generalPasteboard];
     [pasteboard declareTypes:[NSArray arrayWithObjects:NSPasteboardTypeString, nil] owner:nil];
     [pasteboard setString:urlString forType:NSPasteboardTypeString];
+}
+
+- (NSUserDefaults *)setupUserDefaults
+{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSDictionary *initialValueDict = @{
+        @"url" : @"http://gifzo.net/"
+    };
+    
+    [defaults registerDefaults:initialValueDict];
+    
+    return defaults;
 }
 @end
